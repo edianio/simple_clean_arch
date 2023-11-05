@@ -1,5 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:simple_clean_arch/src/data/task/model/app_task_dto.dart';
 
 class IsarServices {
   late final Future<Isar> isar;
@@ -13,6 +14,7 @@ class IsarServices {
     if (Isar.instanceNames.isEmpty) {
       return Isar.open(
         [
+          AppTaskDtoSchema,
         ],
         directory: directory.path,
       );

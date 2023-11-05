@@ -15,18 +15,24 @@ class AppTask {
     required this.createdAt,
   });
 
+  AppTask.empty() : this(
+    title: '',
+    description: '',
+    createdAt: DateTime.now(),
+  );
+
   copyWith({
     int? id,
-    Nullable<String?>? title,
-    Nullable<String?>? description,
+    String? title,
+    String? description,
     Nullable<DateTime?>? completedAt,
     DateTime? createdAt,
   }) {
     return AppTask(
       id: id ?? this.id,
-      title: title?.value ?? this.title,
-      description: description?.value ?? this.description,
-      completedAt: completedAt?.value ?? this.completedAt,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      completedAt: completedAt == null ? this.completedAt : completedAt.value,
       createdAt: createdAt ?? this.createdAt,
     );
   }

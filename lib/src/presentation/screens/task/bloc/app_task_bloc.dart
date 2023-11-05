@@ -19,15 +19,6 @@ class AppTaskBloc extends Bloc<AppTaskEvent, AppTaskState> {
     on<UpdateTaskEvent>(_update);
   }
 
-  Future<void> _add(AddTaskEvent event, Emitter emit) async {
-    try{
-      await _addTask(event.task);
-    }catch(e){
-      emit(AppTaskErrorState(e.toString()));
-    }
-    add(GetTasksEvent());
-  }
-
   Future<void> _get(GetTasksEvent event, Emitter emit) async {
     emit(AppTaskLoadingState());
     try{
@@ -36,6 +27,15 @@ class AppTaskBloc extends Bloc<AppTaskEvent, AppTaskState> {
     }catch(e) {
       emit(AppTaskErrorState(e.toString()));
     }
+  }
+
+  Future<void> _add(AddTaskEvent event, Emitter emit) async {
+    try{
+      await _addTask(event.task);
+    }catch(e){
+      emit(AppTaskErrorState(e.toString()));
+    }
+    add(GetTasksEvent());
   }
 
   Future<void> _delete(DeleteTaskEvent event, Emitter emit) async {
